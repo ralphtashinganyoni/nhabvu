@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "projects": {
+    "data-access-countries": {
+      "projectType": "library",
+      "root": "libs/data-access/countries",
+      "sourceRoot": "libs/data-access/countries/src",
+      "prefix": "nhabvu",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/data-access/countries/src/**/*.ts",
+              "libs/data-access/countries/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "data-access-leagues": {
+      "projectType": "library",
+      "root": "libs/data-access/leagues",
+      "sourceRoot": "libs/data-access/leagues/src",
+      "prefix": "nhabvu",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/data-access/leagues/src/**/*.ts",
+              "libs/data-access/leagues/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "feature-countries": {
+      "projectType": "library",
+      "root": "libs/feature/countries",
+      "sourceRoot": "libs/feature/countries/src",
+      "prefix": "nhabvu",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/feature/countries/src/**/*.ts",
+              "libs/feature/countries/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "feature-leagues": {
+      "projectType": "library",
+      "root": "libs/feature/leagues",
+      "sourceRoot": "libs/feature/leagues/src",
+      "prefix": "nhabvu",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/feature/leagues/src/**/*.ts",
+              "libs/feature/leagues/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "layout": {
+      "projectType": "library",
+      "root": "libs/layout",
+      "sourceRoot": "libs/layout/src",
+      "prefix": "nhabvu",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/layout/src/**/*.ts",
+              "libs/layout/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "nhabvu": {
+      "projectType": "application",
+      "root": "apps/nhabvu",
+      "sourceRoot": "apps/nhabvu/src",
+      "prefix": "nhabvu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/nhabvu",
+            "index": "apps/nhabvu/src/index.html",
+            "main": "apps/nhabvu/src/main.ts",
+            "polyfills": "apps/nhabvu/src/polyfills.ts",
+            "tsConfig": "apps/nhabvu/tsconfig.app.json",
+            "assets": ["apps/nhabvu/src/favicon.ico", "apps/nhabvu/src/assets"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "apps/nhabvu/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/nhabvu/src/environments/environment.ts",
+                  "with": "apps/nhabvu/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "nhabvu:build:production"
+            },
+            "development": {
+              "browserTarget": "nhabvu:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nhabvu:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/nhabvu/src/**/*.ts",
+              "apps/nhabvu/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/nhabvu"],
+          "options": {
+            "jestConfig": "apps/nhabvu/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "nhabvu-e2e": {
+      "root": "apps/nhabvu-e2e",
+      "sourceRoot": "apps/nhabvu-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/nhabvu-e2e/cypress.json",
+            "tsConfig": "apps/nhabvu-e2e/tsconfig.e2e.json",
+            "devServerTarget": "nhabvu:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nhabvu:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/nhabvu-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "defaultProject": "nhabvu"
+}

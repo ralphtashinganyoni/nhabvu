@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@nhabvu/data-access/countries": [
+        "libs/data-access/countries/src/index.ts"
+      ],
+      "@nhabvu/data-access/leagues": ["libs/data-access/leagues/src/index.ts"],
+      "@nhabvu/feature/countries": ["libs/feature/countries/src/index.ts"],
+      "@nhabvu/feature/leagues": ["libs/feature/leagues/src/index.ts"],
+      "@nhabvu/layout": ["libs/layout/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
