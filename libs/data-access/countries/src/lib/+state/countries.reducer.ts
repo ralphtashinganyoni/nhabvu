@@ -28,7 +28,7 @@ export const initialState: State = countriesAdapter.getInitialState({
   totalItems: 0
 });
 
-const CountriesReducer = createReducer(
+const countriesReducer = createReducer(
   initialState,
   on(CountriesActions.loadCountries, (state) => ({
     ...state,
@@ -37,7 +37,7 @@ const CountriesReducer = createReducer(
   })),
   on(CountriesActions.loadCountriesSuccess, (state, { countries }) =>
   countriesAdapter.setAll({
-    
+
   })
   ),
   on(CountriesActions.loadCountriesFailure, (state, { error }) => ({
