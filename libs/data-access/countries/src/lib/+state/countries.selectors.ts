@@ -3,47 +3,47 @@ import { getSelectors, RouterReducerState } from '@ngrx/router-store';
 import {
   COUNTRIES_FEATURE_KEY,
   State,
-  UsersPartialState,
-  usersAdapter
+  CountriesPartialState,
+  countriesAdapter
 } from './countries.reducer';
 
-// Lookup the 'Users' feature state managed by NgRx
-export const getUsersState = createFeatureSelector<UsersPartialState, State>(
+// Lookup the 'Countries' feature state managed by NgRx
+export const getCountriesState = createFeatureSelector<CountriesPartialState, State>(
     COUNTRIES_FEATURE_KEY
 );
 export const selectRouter = createFeatureSelector<RouterReducerState>('router') ;
 
-const { selectAll, selectEntities } = usersAdapter.getSelectors();
+const { selectAll, selectEntities } = countriesAdapter.getSelectors();
 const { selectRouteParam } = getSelectors(selectRouter);
 
 export const getLoadingState = createSelector(
-  getUsersState,
+  getCountriesState,
   (state: State) => state.loading
 );
 
 export const getTotalItems = createSelector(
-  getUsersState,
+  getCountriesState,
   (state: State) => state.totalItems
 );
 export const getCurrentPage = createSelector(
-  getUsersState,
+  getCountriesState,
   (state: State) => state.currentPage
 );
-export const getUsersError = createSelector(
-  getUsersState,
+export const getCountriesError = createSelector(
+  getCountriesState,
   (state: State) => state.error
 );
 
-export const getAllUsers = createSelector(getUsersState, (state: State) =>
+export const getAllCountries = createSelector(getCountriesState, (state: State) =>
   selectAll(state)
 );
 
-const getEntities = createSelector(getUsersState, (state) => selectEntities(state));
+const getEntities = createSelector(getCountriesState, (state) => selectEntities(state));
 
-const selectCurrentUserId = selectRouteParam('userId');
+const selectCurrentCode = selectRouteParam('countryCode');
 
 export const selectCurrentUser = createSelector(
-  selectCurrentUserId,
+  selectCurrentCode,
   getEntities,
-  (userId, entities) => !userId ? undefined : entities[userId]
+  (countryCode, entities) => !countryCode ? undefined : entities[countryCode]
 );

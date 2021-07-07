@@ -6,7 +6,7 @@ import { catchError, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable()
-export class UsersEffects {
+export class CountriesEffects {
 
   loadAllUsers$ = createEffect(() =>
   this.actions.pipe(

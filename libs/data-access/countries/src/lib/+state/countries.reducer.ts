@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import * as UsersActions from './countries.actions';
+import * as CountriesActions from './countries.actions';
 import { CountriesEntity } from './countries.models';
 
 export const COUNTRIES_FEATURE_KEY = 'countries';
@@ -13,37 +13,34 @@ export interface State extends EntityState<CountriesEntity> {
   totalItems: number;
 }
 
-export interface UsersPartialState {
+export interface CountriesPartialState {
   readonly [COUNTRIES_FEATURE_KEY]: State;
 }
 
-export const usersAdapter: EntityAdapter<CountriesEntity> = createEntityAdapter<CountriesEntity>({
-  selectId: u => u.id
+export const countriesAdapter: EntityAdapter<CountriesEntity> = createEntityAdapter<CountriesEntity>({
+  selectId: u => u.code
 });
 
-export const initialState: State = usersAdapter.getInitialState({
+export const initialState: State = countriesAdapter.getInitialState({
   // set initial required properties
   loading: false,
   currentPage: 1,
   totalItems: 0
 });
 
-const usersReducer = createReducer(
+const CountriesReducer = createReducer(
   initialState,
-  on(UsersActions.loadUsers, (state) => ({
+  on(CountriesActions.loadCountries, (state) => ({
     ...state,
     loading: true,
     error: null
   })),
-  on(UsersActions.loadUsersSuccess, (state, { users }) =>
-    usersAdapter.setAll(users.items, {
-      ...state,
-      currentPage: users.pageNumber,
-      totalItems: users.totalItems,
-      loading: false
-    })
+  on(CountriesActions.loadCountriesSuccess, (state, { countries }) =>
+  countriesAdapter.setAll({
+    
+  })
   ),
-  on(UsersActions.loadUsersFailure, (state, { error }) => ({
+  on(CountriesActions.loadCountriesFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error
@@ -51,5 +48,5 @@ const usersReducer = createReducer(
 );
 
 export function reducer(state: State | undefined, action: Action) {
-  return usersReducer(state, action);
+  return countriesReducer(state, action);
 }

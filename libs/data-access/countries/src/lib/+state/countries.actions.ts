@@ -3,10 +3,7 @@ import { CountriesEntity } from './countries.models';
 
 export const loadCountries = createAction(
   '[Countries] Load Countries',
-  props<{
-    pageNumber: number;
-    pageSize: number;
-  }>());
+  );
 
 export const loadCountriesSuccess = createAction(
   '[Countries] Load Countries Success',
